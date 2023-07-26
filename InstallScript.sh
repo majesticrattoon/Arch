@@ -5,7 +5,9 @@ sleep 1
 
 cd
 
-sudo pacman -S amd-ucode mesa neofetch noto-fonts p7zip lib32-mesa xf86-video-amdgpu amdvlk xorg-server xorg-apps i3-wm i3blocks i3status xss-lock i3lock nano ly neovim jdk-openjdk thunar firewalld firefox base-devel alacritty neofetch xdg-user-dirs sysstat pulsemixer rofi picom lxappearance feh code reflector
+sudo pacman -S amd-ucode mesa neofetch noto-fonts p7zip lib32-mesa xf86-video-amdgpu amdvlk xorg-server xorg-apps i3-wm i3blocks udisks2 udiskie i3status xss-lock i3lock nano ly neovim jdk-openjdk firewalld base-devel alacritty neofetch xdg-user-dirs dmenu picom lxappearance feh reflector
+
+sudo pacman -S thunar firefox code freecad thunderbird steam discord gimp inkscape okular
 
 xdg-user-dirs-update
 
@@ -17,9 +19,9 @@ sudo systemctl enable ly
 
 mkdir ~/.config/i3
 
-mkdir ~/.config/i3blocks
+#mkdir ~/.config/i3blocks
 
-mkdir ~/.config/i3blocks/scripts
+#mkdir ~/.config/i3blocks/scripts
 
 mkdir ~/.config/picom
 
@@ -39,7 +41,7 @@ sleep 1
 
 mv /home/lukas/Arch/i3config/config /home/lukas/.config/i3/
 
-mv /home/lukas/Arch/i3blocks/config /home/lukas/.config/i3blocks/
+#mv i3blocks
 
 mv /home/lukas/Arch/picom/picom.conf /home/lukas/.config/picom/
 
@@ -59,6 +61,6 @@ rm -fr yay-bin/
 
 yay
 
-yay -S ttf-jetbrains-mono-nerd rofi-power-menu
+yay -S ttf-jetbrains-mono-nerd
 
 echo "Script finished"

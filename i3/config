@@ -51,7 +51,7 @@ bindsym $mod+q split toggle kill
 # Switch windows
 bindsym $mod+w exec "rofi -modi window -show window"
 # Run command
-bindsym $mod+d exec "rofi -modi run -show run"
+bindsym $mod+d exec i3-dmenu-desktop
 #Launch an application
 bindsym $mod+space exec "rofi -modi drun -show drun"
 
@@ -60,12 +60,6 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -104,7 +98,7 @@ set $ws4 "4:"
 set $ws5 "5:"
 set $ws6 "6:"
 set $ws7 "7:󰺻"
-set $ws8 "8:"
+set $ws8 "8:󰙯"
 set $ws9 "9:"
 set $ws10 "10:"
 
@@ -144,6 +138,15 @@ workspace $ws8 output HDMI-A-0
 workspace $ws9 output HDMI-A-0
 workspace $ws10 output HDMI-A-0
 
+# assign app to workspace
+assign [class="Thunar"] $ws6
+assign [class="firefox"] $ws4
+assign [class="code-oss"] $ws2
+assign [class="steam"] $ws9
+assign [class="thunderbird"] $ws7
+assign [class="FreeCAD"] $ws3
+assign [class="discord"] $ws8
+
 # move workspace to display
 bindsym $mod+x move workspace to output right
 bindsym $mod+z move workspace to output left
@@ -152,9 +155,8 @@ bindsym $mod+z move workspace to output left
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-
 # Rofi power menu
-bindsym $mod+Shift+e exec "rofi -show menu -modi 'menu:rofi-power-menu'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -212,12 +214,14 @@ client.urgent           #4c566a #BF616A #d8dee9 #BF616A
 client.background       #2e3440
 
 # Apolication keybindings
-bindsym $mod+b exec --no-startup-id firefox
-bindsym $mod+t exec --no-startup-id thunar
-bindsym $mod+c exec --no-startup-id code
-bindsym $mod+k exec --no-startup-id freecad
+bindsym $mod+b exec firefox
+bindsym $mod+t exec thunar
+bindsym $mod+c exec code
+bindsym $mod+k exec freecad
 
 # Autostart
 exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle' cz,us"
 exec --no-startup-id picom -b
+exec --no-startup-id flameshot
 exec --no-startup-id "feh --bg-scale /home/lukas/Pictures/wallpapers/wallpaper.jpg"
+exec_always --no-startup-id xrandr --output DisplayPort-1 --rate 143.97
