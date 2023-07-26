@@ -1,0 +1,223 @@
+# Set mod button (Super)
+set $mod Mod4
+
+# Font
+#font pango:MesloLGS NF 14
+font pango:Noto-font 14
+
+# Run XDG autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# Screen lock
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c '3B4252' --nofork
+
+# Gaps config
+for_window [class="^.*"] border pixel 1 
+gaps inner 15
+smart_borders on
+
+# Master-stack layout (kind of)
+default_orientation vertical
+for_window [class=".*"] split toggle 
+
+# Audio buttons
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Start a terminal
+bindsym $mod+Return exec alacritty
+
+# Start floating terminal
+bindsym F12 exec /usr/bin/tilix -q
+
+bindsym $mod+grave scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+
+# Kill focused window
+bindsym $mod+q split toggle kill
+
+# Rofi
+# Switch windows
+bindsym $mod+w exec "rofi -modi window -show window"
+# Run command
+bindsym $mod+d exec "rofi -modi run -show run"
+#Launch an application
+bindsym $mod+space exec "rofi -modi drun -show drun"
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Control+h split h
+
+# split in vertical orientation
+bindsym $mod+Control+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+Control+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+Control+s layout stacking
+bindsym $mod+Control+w layout tabbed
+bindsym $mod+Control+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Shift+t focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Workspaces
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:ﱘ"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# assign displays
+workspace $ws1 output DisplayPort-1
+workspace $ws2 output DisplayPort-1
+workspace $ws3 output DisplayPort-1
+workspace $ws4 output DisplayPort-1
+workspace $ws5 output HDMI-A-0
+workspace $ws6 output HDMI-A-0
+workspace $ws7 output HDMI-A-0
+workspace $ws8 output HDMI-A-0
+workspace $ws9 output HDMI-A-0
+workspace $ws10 output HDMI-A-0
+
+# move workspace to display
+bindsym $mod+x move workspace to output right
+bindsym $mod+z move workspace to output left
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Rofi power menu
+bindsym $mod+Shift+e exec "rofi -show menu -modi 'menu:rofi-power-menu'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# i3bar
+bar {
+    position top
+    mode dock
+    tray_output primary
+    tray_padding 4
+    font pango:MesloLGS NF 14
+    separator_symbol " "
+    strip_workspace_numbers yes
+    status_command i3blocks
+    colors {
+      background #2e3440
+      statusline #d8dee9
+      separator #8FBCBB
+
+      focused_workspace  #2e3440 #2e3440 #81A1C1
+      active_workspace   #2e3440 #2e3440 #8FBCBB
+      inactive_workspace #2e3440 #2e3440 #4c566a
+      urgent_workspace   #2e3440 #2e3440 #BF616A
+      binding_mode       #2e3440 #2e3440 #BF616A
+    }
+}
+
+# Window color settings
+# class                 border  backgr. text    indicator
+client.focused          #4c566a #81a1c1 #d8dee9 #81a1c1
+client.unfocused        #4c566a #8FBCBB #2e3440 #8FBCBB
+client.focused_inactive #4c566a #81a1c1 #2e3440 #2e3440
+client.placeholder      #4c566a #2e3440 #4c566a #2e3440
+client.urgent           #4c566a #BF616A #d8dee9 #BF616A
+
+client.background       #2e3440
+
+# Apolication keybindings
+bindsym $mod+b exec --no-startup-id firefox
+bindsym $mod+t exec --no-startup-id thunar
+bindsym $mod+c exec --no-startup-id code
+bindsym $mod+k exec --no-startup-id freecad
+
+# Autostart
+exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle' cz,us"
+exec --no-startup-id picom -b
+exec --no-startup-id "feh --bg-scale fill ~/Pictures/wallpapers/wallpaper.jpg"
