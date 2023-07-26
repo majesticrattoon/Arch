@@ -2,8 +2,7 @@
 set $mod Mod4
 
 # Font
-#font pango:MesloLGS NF 14
-font pango:Noto-font 14
+font pango:JetBrains Mono Nerd 14
 
 # Run XDG autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -98,16 +97,16 @@ bindsym $mod+Shift+t focus mode_toggle
 bindsym $mod+a focus parent
 
 # Workspaces
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
-set $ws7 "7:"
-set $ws8 "8:"
-set $ws9 "9:"
-set $ws10 "10:ﱘ"
+set $ws1 "1:"
+set $ws2 "2:󱃖"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:󰺻"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -182,10 +181,11 @@ bindsym $mod+r mode "resize"
 bar {
     position top
     mode dock
+    padding 0px 15px
     tray_output primary
     tray_padding 4
-    font pango:MesloLGS NF 14
-    separator_symbol " "
+    font pango:JetBrains Mono Nerd 14
+    separator_symbol "  "
     strip_workspace_numbers yes
     status_command i3blocks
     colors {
@@ -220,4 +220,4 @@ bindsym $mod+k exec --no-startup-id freecad
 # Autostart
 exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle' cz,us"
 exec --no-startup-id picom -b
-exec --no-startup-id "feh --bg-scale fill ~/Pictures/wallpapers/wallpaper.jpg"
+exec --no-startup-id "feh --bg-scale /home/lukas/Pictures/wallpapers/wallpaper.jpg"

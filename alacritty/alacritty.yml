@@ -26,7 +26,7 @@ colors:
     matches:
       foreground: CellBackground
       background: '#88c0d0'
-    bar:
+    colors.footer_bar:
       background: '#434c5e'
       foreground: '#d8dee9'
   normal:
@@ -58,14 +58,14 @@ colors:
     white: '#aeb3bb'
 
 window:
-  opacity: 0.7
+  opacity: 1
   padding:
     x: 5
     y: 5
 
 font:
   normal:
-    family: MesloLGS NF
-    style: Regular
+    family: JetBrainsMono Nerd Font
+    style: normal
 
-  size: 9.0
+  size: 14
